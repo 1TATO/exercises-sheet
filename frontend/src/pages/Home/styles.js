@@ -30,7 +30,7 @@ export const Content = styled.div`
       margin-top: 3rem;
 
       a {
-        button {
+        /* button {
           font-size: 1rem;
           color: #fff;
           background: var(--button);
@@ -44,7 +44,7 @@ export const Content = styled.div`
           &:hover {
             filter: brightness(0.9);
           }
-        }
+        } */
 
         & + a {
           margin-left: 3rem;

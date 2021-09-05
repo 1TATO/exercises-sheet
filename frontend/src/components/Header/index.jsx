@@ -7,7 +7,9 @@ function Header() {
   return (
     <Container>
       <Content>
-        <img src={LogoImg} alt="Exercises" />
+        <Link to="/">
+          <img src={LogoImg} alt="Exercises" />
+        </Link>
 
         <nav>
           <Link to="/create">Criar conta</Link>

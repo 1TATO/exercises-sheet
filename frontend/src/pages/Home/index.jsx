@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Header from '../../components/Header';
+import Button from '../../components/Button';
 
 import BackgroundImg from '../../assets/homeBackground.svg';
 import { Container, Content } from './styles';
@@ -19,10 +20,10 @@ function Home() {
 
             <div>
               <Link to="/create">
-                <button type="button">Criar conta</button>
+                <Button type="button">Criar conta</Button>
               </Link>
               <Link to="/login">
-                <button type="button">Entrar</button>
+                <Button type="button">Entrar</Button>
               </Link>
             </div>
           </div>

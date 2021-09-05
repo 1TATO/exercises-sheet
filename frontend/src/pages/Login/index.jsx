@@ -1,8 +1,13 @@
-// import {} from './styles';
+import Header from '../../components/Header';
+import SignIn from '../../components/SignIn';
 
 function Login() {
   return (
-    <h1>Login</h1>
+    <>
+      <Header />
+
+      <SignIn />
+    </>
   );
 }
 

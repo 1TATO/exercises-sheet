@@ -1,8 +1,13 @@
-// import {} from './styles';
+import Header from '../../components/Header';
+import SignUp from '../../components/SignUp';
 
 function Create() {
   return (
-    <h1>Create</h1>
+    <>
+      <Header />
+
+      <SignUp />
+    </>
   );
 }
 
