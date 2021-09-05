@@ -20,7 +20,7 @@ export const Content = styled.div`
 
   a {
     font-size: 1rem;
-    color: #000;
+    color: #fff;
 
     & + a {
       margin-left: 2rem;

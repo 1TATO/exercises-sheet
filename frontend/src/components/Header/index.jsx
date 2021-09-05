@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import LogoImg from '../../assets/logo.png';
 import { Container, Content } from './styles';
 
@@ -8,8 +10,8 @@ function Header() {
         <img src={LogoImg} alt="Exercises" />
 
         <nav>
-          <a href="google.com">Criar conta</a>
-          <a href="google.com">Entrar</a>
+          <Link to="/create">Criar conta</Link>
+          <Link to="/login">Entrar</Link>
         </nav>
       </Content>
     </Container>
