@@ -1,13 +1,15 @@
 const express = require('express');
-const db = require('./db');
 const routes = express.Router();
 
-routes.get('/dashboard', db.selectExercises);
+const users = require('./controllers/UserController');
+const exercises = require('./controllers/ExerciseController');
 
-routes.post('/dashboard', db.insertExercise);
+routes.get('/users', users.findAll);
+routes.post('/users', users.createUser);
 
-routes.put('/dashboard/:id', db.updateExercise);
-
-routes.delete('/dashboard/:id', db.deleteExercise);
+routes.get('/dashboard', exercises.findAll);
+routes.post('/dashboard', exercises.createExercise);
+routes.put('/dashboard/:id', exercises.updateExercise);
+routes.delete('/dashboard/:id', exercises.destroyExercise);
 
 module.exports = routes;

@@ -1,10 +1,23 @@
 const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
+require('dotenv/config');
+
+const dbName = process.env.DB_NAME;
+const dbUser = process.env.DB_USER;
+const dbHost = process.env.DB_HOST;
+const dbPassword = process.env.DB_PASSWORD;
+const dbDialect = process.env.DB_DIALECT;
+
+const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+  dialect: dbDialect,
+  host: dbHost
+});
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '123456',
-  database: 'ppip2'
+  host: dbHost,
+  user: dbUser,
+  password: dbPassword,
+  database: dbDialect
 });
 
 db.connect((err) => {
@@ -17,55 +30,73 @@ db.connect((err) => {
   console.log('Conexao estabelecida');
 });
 
-module.exports = {
-  async selectExercises(req, res) {
-    db.query('SELECT * FROM exercises', (err, results) => {
-      if (err) {
-        throw err;
-      }
+module.exports = sequelize;
 
-      console.log(results);
-      res.json(results)
-    })
-  },
+// module.exports = {
+//   sequelize,
 
-  async insertExercise(req, res) {
-    const exercise = req.body;
+//   async syncDb() {
+//     await sequelize.sync({ force: true });
+//     console.log("Todos os Models foram sincronizados com sucesso.");
+//   },
 
-    db.query('INSERT INTO exercises SET ?', exercise, (err, results) => {
-      if (err) {
-        throw err;
-      }
+//   async sequelizeConnection() {
+//     try {
+//       await sequelize.authenticate();
+//       console.log('Connection has been established successfully.');
+//     } catch (error) {
+//       console.error('Unable to connect to the database:', error);
+//     }
+//   },
 
-      console.log('Last insert ID:', results.insertId);
-      res.json(results);
-    });
-  },
+//   async selectExercises(req, res) {
+//     db.query('SELECT * FROM exercises', (err, results) => {
+//       if (err) {
+//         throw err;
+//       }
 
-  async updateExercise(req, res) {
-    const id = req.params.id;
-    const { name } = req.body;
+//       console.log(results);
+//       res.json(results)
+//     })
+//   },
 
-    db.query('UPDATE exercises SET name = ? Where ID = ?', [name, id], (err, results) => {
-      if (err) {
-        throw err;
-      }
+//   async insertExercise(req, res) {
+//     const exercise = req.body;
 
-      console.log(`Changed ${results.changedRows} row(s)`);
-      res.json(results);
-    });
-  },
+//     db.query('INSERT INTO exercises SET ?', exercise, (err, results) => {
+//       if (err) {
+//         throw err;
+//       }
 
-  async deleteExercise(req, res) {
-    const id = req.params.id;
+//       console.log('Last insert ID:', results.insertId);
+//       res.json(results);
+//     });
+//   },
 
-    db.query('DELETE FROM exercises WHERE id = ?', id, (err, results) => {
-      if (err) {
-        throw err;
-      }
+//   async updateExercise(req, res) {
+//     const id = req.params.id;
+//     const { name } = req.body;
 
-      console.log(`Deleted ${results.affectedRows} row(s)`);
-      res.json(results);
-    });
-  }
-}
+//     db.query('UPDATE exercises SET name = ? Where ID = ?', [name, id], (err, results) => {
+//       if (err) {
+//         throw err;
+//       }
+
+//       console.log(`Changed ${results.changedRows} row(s)`);
+//       res.json(results);
+//     });
+//   },
+
+//   async deleteExercise(req, res) {
+//     const id = req.params.id;
+
+//     db.query('DELETE FROM exercises WHERE id = ?', id, (err, results) => {
+//       if (err) {
+//         throw err;
+//       }
+
+//       console.log(`Deleted ${results.affectedRows} row(s)`);
+//       res.json(results);
+//     });
+//   }
+// }
