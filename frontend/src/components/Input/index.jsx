@@ -4,7 +4,9 @@ import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
-function Input({ type, name, placeholder }) {
+function Input({
+  type, name, placeholder, ...rest
+}) {
   const inputRef = useRef(null);
   const {
     fieldName,
@@ -21,12 +23,14 @@ function Input({ type, name, placeholder }) {
   }, [fieldName, registerField]);
 
   return (
-    <Container isErrored={!!error}>
+    <Container>
       <input
         ref={inputRef}
         type={type}
         name={name}
         placeholder={placeholder}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
       />
 
       {error}

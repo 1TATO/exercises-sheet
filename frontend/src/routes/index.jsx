@@ -5,6 +5,8 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Create from '../pages/Create';
 
+import Dashboard from '../pages/Dashboard';
+
 function Routes() {
   return (
     <>
@@ -13,6 +15,8 @@ function Routes() {
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/create" component={Create} />
+
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </BrowserRouter>
       <GlobalStyle />
