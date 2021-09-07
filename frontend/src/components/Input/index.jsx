@@ -10,6 +10,7 @@ function Input({
   const inputRef = useRef(null);
   const {
     fieldName,
+    defaultValue,
     error,
     registerField,
   } = useField(name);
@@ -26,6 +27,7 @@ function Input({
     <Container>
       <input
         ref={inputRef}
+        defaultValue={defaultValue}
         type={type}
         name={name}
         placeholder={placeholder}
