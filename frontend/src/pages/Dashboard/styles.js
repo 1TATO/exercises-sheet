@@ -35,6 +35,13 @@ export const Content = styled.div`
         text-align: center;
         font-size: 1.25rem;
       }
+
+      button {
+        border: 0;
+        background: transparent;
+        color: var(--button);
+        font-size: 1.25rem;
+      }
     }
   }
 `;

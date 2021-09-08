@@ -2,6 +2,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import GlobalStyle from '../styles/global';
 
 import { AuthProvider } from '../context/AuthContext';
+import { ExercisesProvider } from '../context/ExercisesContext';
 
 import { Route } from './Routes';
 
@@ -16,13 +17,15 @@ function Routes() {
     <>
       <BrowserRouter>
         <AuthProvider>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/create" component={Create} />
+          <ExercisesProvider>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/create" component={Create} />
 
-            <Route path="/dashboard" component={Dashboard} isPrivate />
-          </Switch>
+              <Route path="/dashboard" component={Dashboard} isPrivate />
+            </Switch>
+          </ExercisesProvider>
         </AuthProvider>
       </BrowserRouter>
       <GlobalStyle />

@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { FiEdit, FiTrash2, FiX } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { Form } from '@unform/web';
+
+import { useExercise } from '../../context/ExercisesContext';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -12,6 +15,10 @@ import Input from '../../components/Input';
 Modal.setAppElement('#root');
 
 function Dashboard() {
+  const {
+    exercises, createExercise, updateExercise, deleteExercise,
+  } = useExercise();
+
   const [isNewExerciseModalOpen, setIsNewExerciseModalOpen] = useState(false);
 
   function handleOpenNewExerciseModal() {
@@ -22,10 +29,10 @@ function Dashboard() {
     setIsNewExerciseModalOpen(false);
   }
 
-  function handleSubmit(data) {
-    // e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(data);
+  async function handleSubmit(data) {
+    createExercise(data);
+
+    handleCloseNewExerciseModal();
   }
 
   return (
@@ -51,7 +58,14 @@ function Dashboard() {
             <FiX />
           </button>
 
-          <Form onSubmit={handleSubmit} initialData={{}}>
+          <Form
+            onSubmit={handleSubmit}
+            initialData={{
+              name: exercises.name,
+              weight: exercises.weight,
+              repetitions: exercises.repetitions,
+            }}
+          >
             <h2 className="react-modal-title">Novo exercício</h2>
 
             <Input name="name" type="text" placeholder="Nome" />
@@ -77,40 +91,23 @@ function Dashboard() {
             </thead>
 
             <tbody>
-              <tr>
-                <td>Biceps alternado</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
-              <tr>
-                <td>Supino</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
-              <tr>
-                <td>Supino</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
-
+              {exercises.map((exercise) => (
+                <tr key={exercise.id}>
+                  <td>{exercise.name}</td>
+                  <td>{exercise.weight}</td>
+                  <td>{exercise.repetitions}</td>
+                  <td className="action">
+                    <button type="button">
+                      <FiEdit onClick={() => updateExercise(exercise.id)} />
+                    </button>
+                  </td>
+                  <td className="action">
+                    <button type="button">
+                      <FiTrash2 onClick={() => deleteExercise(exercise.id)} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </Content>
