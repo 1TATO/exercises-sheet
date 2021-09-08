@@ -24,6 +24,7 @@ function Dashboard() {
 
   function handleSubmit(data) {
     // e.preventDefault();
+    // eslint-disable-next-line no-console
     console.log(data);
   }
 

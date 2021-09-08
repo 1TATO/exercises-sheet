@@ -1,7 +1,9 @@
 import { Form } from '@unform/web';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useContext } from 'react';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
+
+import { AuthContext } from '../../context/AuthContext';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -11,8 +13,9 @@ import { Container, Content } from './styles';
 
 function SignIn() {
   const formRef = useRef(null);
-
   const history = useHistory();
+
+  const { signIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(async (data) => {
     try {
@@ -27,6 +30,11 @@ function SignIn() {
         abortEarly: false,
       });
 
+      signIn({
+        email: data.email,
+        password: data.password,
+      });
+
       history.push('/dashboard');
     } catch (err) {
       const validationErrors = {};
@@ -38,7 +46,7 @@ function SignIn() {
         formRef.current.setErrors(validationErrors);
       }
     }
-  }, []);
+  }, [signIn]);
 
   return (
     <>
