@@ -13,6 +13,9 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  font-size: 1rem;
+  color: #fff;
+
   > a {
     img {
       height: 60px;

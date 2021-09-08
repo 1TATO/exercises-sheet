@@ -15,9 +15,14 @@ function Header() {
         </Link>
 
         {user ? (
-          <nav>
+          <p>
+            Bem-vindo,
+            {' '}
+            {user.name}
+            .
+            {' '}
             <Link to="/" onClick={signOut}>Sair</Link>
-          </nav>
+          </p>
         ) : (
           <nav>
             <Link to="/create">Criar conta</Link>

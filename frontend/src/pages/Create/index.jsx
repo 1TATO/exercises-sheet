@@ -3,6 +3,8 @@ import { useCallback, useRef } from 'react';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
+import api from '../../services/api';
+
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -27,7 +29,9 @@ function SignUp() {
         abortEarly: false,
       });
 
-      history.push('/dashboard');
+      await api.post('/signup', data);
+
+      history.push('/login');
     } catch (err) {
       const validationErrors = {};
 
