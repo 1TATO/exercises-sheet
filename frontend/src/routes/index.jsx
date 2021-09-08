@@ -1,7 +1,9 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import GlobalStyle from '../styles/global';
 
 import { AuthProvider } from '../context/AuthContext';
+
+import { Route } from './Routes';
 
 import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -19,7 +21,7 @@ function Routes() {
             <Route path="/login" component={Login} />
             <Route path="/create" component={Create} />
 
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} isPrivate />
           </Switch>
         </AuthProvider>
       </BrowserRouter>
