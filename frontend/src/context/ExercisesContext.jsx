@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import {
-  createContext, useEffect, useContext, useState,
+  createContext, useEffect, useContext, useState, useCallback,
 } from 'react';
 
 import api from '../services/api';
@@ -9,6 +10,8 @@ const ExercisesContext = createContext();
 // eslint-disable-next-line react/prop-types
 const ExercisesProvider = ({ children }) => {
   const [exercises, setExercises] = useState([]);
+  const [updatedExercise, setUpdatedExercise] = useState({});
+  const [updatingExercise, setUpdatingExercise] = useState(false);
 
   useEffect(() => {
     api.get('/dashboard')
@@ -24,10 +27,41 @@ const ExercisesProvider = ({ children }) => {
     ]);
   }
 
-  async function updateExercise(id) {
-    console.log(id);
+  // const updateExercise = useCallback(async (exercise) => {
+  //   try {
+  //     setUpdatedExercise(exercise);
+  //     console.log('exercise', exercise);
 
-    // await api.update(`/dashboard/${id}`);
+  //     const { name, weight, repetitions } = exercise;
+
+  //     const response = await api.put(`/dashboard/${exercise.id}`, { name, weight, repetitions });
+
+  //     console.log('response', response);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
+
+  async function updateExercise(exercise) {
+    // console.log('exercise', exercise.id);
+    setUpdatedExercise(exercise);
+
+    const response = await api.put(`/dashboard/${exercise.id}`);
+
+    console.log('response', response);
+    const updExercise = response.data.exercises;
+
+    console.log('updExercise', updExercise);
+
+    const list = exercises.map((ex) => {
+      if (ex.id === exercise.id) {
+        return updExercise;
+      }
+
+      return ex;
+    });
+
+    setExercises(list);
   }
 
   async function deleteExercise(id) {
@@ -38,7 +72,14 @@ const ExercisesProvider = ({ children }) => {
 
   return (
     <ExercisesContext.Provider value={{
-      exercises, createExercise, updateExercise, deleteExercise,
+      exercises,
+      createExercise,
+      updateExercise,
+      deleteExercise,
+      updatedExercise,
+      setUpdatedExercise,
+      updatingExercise,
+      setUpdatingExercise,
     }}
     >
       {children}
