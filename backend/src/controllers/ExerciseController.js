@@ -6,7 +6,7 @@ const accessTokenSecret = 'ifrs-ppip2';
 
 module.exports = {
   async findAll(req, res) {
-    try {
+    try {      
       const exercises = await Exercise.findAll();
 
       return res.json(exercises);
@@ -55,7 +55,7 @@ module.exports = {
     }
 
     const token = authHeader.split(' ')[1];
-    
+
     try {
       const decoded = jwt.verify(token, accessTokenSecret)
 
