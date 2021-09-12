@@ -1,24 +1,16 @@
+/* eslint-disable no-unused-vars */
 import {
-  createContext, useContext, useState,
+  createContext, useCallback, useContext, useState,
 } from 'react';
-
-// eslint-disable-next-line import/no-cycle
-import ModalComponent from '../components/Modal';
-
-import { useExercise } from './ExercisesContext';
+import api from '../services/api';
 
 const ModalContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const ModalProvider = ({ children }) => {
-  const {
-    createExercise, updateExercise, setUpdatingExercise,
-  } = useExercise();
-
   const [isNewExerciseModalOpen, setIsNewExerciseModalOpen] = useState(false);
 
   function handleOpenNewExerciseModal() {
-    setUpdatingExercise(false);
     setIsNewExerciseModalOpen(true);
   }
 
@@ -26,30 +18,36 @@ const ModalProvider = ({ children }) => {
     setIsNewExerciseModalOpen(false);
   }
 
-  async function handleSubmit(data) {
-    createExercise(data);
-
-    handleCloseNewExerciseModal();
-  }
-
-  async function handleUpdate(exercise) {
-    setIsNewExerciseModalOpen(true);
-    setUpdatingExercise(true);
-
-    updateExercise(exercise);
-  }
-
   return (
-    <ModalContext.Provider value={{
-      isNewExerciseModalOpen,
-      handleOpenNewExerciseModal,
-      handleCloseNewExerciseModal,
-      handleSubmit,
-      handleUpdate,
-    }}
-    >
+    <ModalContext.Provider value={{ handleOpenNewExerciseModal, handleCloseNewExerciseModal }}>
       {children}
-      <ModalComponent edit />
+
+      {/* <Modal
+          isOpen={isNewExerciseModalOpen}
+          onRequestClose={handleCloseNewExerciseModal}
+          overlayClassName="react-modal-overlay"
+          className="react-modal-content"
+        >
+          <button
+            type="button"
+            onClick={handleCloseNewExerciseModal}
+            className="react-modal-close"
+          >
+            <FiX />
+          </button>
+
+          <Form onSubmit={handleSubmit} initialData={{}}>
+            <h2 className="react-modal-title">Novo exercício</h2>
+
+            <Input name="name" type="text" placeholder="Nome" />
+            <Input name="weight" type="text" placeholder="Carga" />
+            <Input name="repetitions" type="text" placeholder="Repetições" />
+
+            <Button type="submit">
+              Cadastrar
+            </Button>
+          </Form>
+        </Modal> */}
     </ModalContext.Provider>
   );
 };
