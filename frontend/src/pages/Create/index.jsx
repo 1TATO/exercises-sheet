@@ -55,7 +55,7 @@ function SignUp() {
             <Input name="email" type="email" placeholder="E-mail" />
             <Input name="password" type="password" placeholder="Senha" />
 
-            <Button type="submit">
+            <Button type="submit" onClick={() => {}}>
               Criar conta
             </Button>
           </Form>

@@ -12,14 +12,7 @@ function Button({ onClick, children }) {
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  onClick: PropTypes.any.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
-
-// Button.defaultProps = {
-//   onClick: PropTypes.any,
-// };
-
-// PropTypes.checkPropTypes(Button.propTypes, Button.defaultProps, 'prop', 'Button');
 
 export default Button;

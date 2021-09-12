@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   createContext, useCallback, useContext, useState,
 } from 'react';
@@ -5,7 +6,6 @@ import api from '../services/api';
 
 const AuthContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [data, setData] = useState(() => {
     const token = localStorage.getItem('@P2:token');

@@ -58,7 +58,7 @@ function Dashboard() {
             <Input name="weight" type="text" placeholder="Carga" />
             <Input name="repetitions" type="text" placeholder="Repetições" />
 
-            <Button type="submit">
+            <Button type="submit" onClick={() => {}}>
               Cadastrar
             </Button>
           </Form>

@@ -20,10 +20,10 @@ function Home() {
 
             <div>
               <Link to="/create">
-                <Button type="button">Criar conta</Button>
+                <Button type="button" onClick={() => {}}>Criar conta</Button>
               </Link>
               <Link to="/login">
-                <Button type="button">Entrar</Button>
+                <Button type="button" onClick={() => {}}>Entrar</Button>
               </Link>
             </div>
           </div>
