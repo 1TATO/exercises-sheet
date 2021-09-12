@@ -5,11 +5,17 @@ import Button from '../../components/Button';
 import ExerciseModal from '../../components/ExerciseModal';
 
 import { useExerciseModal } from '../../context/ExerciseModalContext';
+import { useExerciseForm } from '../../context/ExerciseFormContext';
 
 import { Container, Content } from './styles';
 
 function Dashboard() {
   const { handleOpenNewExerciseModal } = useExerciseModal();
+  const {
+    exercises,
+    handleEditExercise,
+    handleDeleteExercise,
+  } = useExerciseForm();
 
   return (
     <>
@@ -35,39 +41,23 @@ function Dashboard() {
             </thead>
 
             <tbody>
-              <tr>
-                <td>Biceps alternado</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
-              <tr>
-                <td>Supino</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
-              <tr>
-                <td>Supino</td>
-                <td>20</td>
-                <td>4X15</td>
-                <td className="action">
-                  <FiEdit />
-                </td>
-                <td className="action">
-                  <FiTrash2 />
-                </td>
-              </tr>
+              {exercises.map((exercise) => (
+                <tr key={exercise.id}>
+                  <td>{exercise.name}</td>
+                  <td>{exercise.weight}</td>
+                  <td>{exercise.repetitions}</td>
+                  <td className="action">
+                    <button type="button" onClick={() => handleEditExercise(exercise)}>
+                      <FiEdit />
+                    </button>
+                  </td>
+                  <td className="action">
+                    <button type="button" onClick={() => handleDeleteExercise(exercise)}>
+                      <FiTrash2 />
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </Content>

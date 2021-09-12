@@ -35,6 +35,19 @@ export const Content = styled.div`
         text-align: center;
         font-size: 1.25rem;
       }
+
+      > button {
+        color: var(--button);
+        background: transparent;
+        border: 0;
+        font-size: 1.25rem;
+
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+      }
     }
   }
 `;

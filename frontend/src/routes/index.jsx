@@ -10,7 +10,9 @@ import Login from '../pages/Login';
 import Create from '../pages/Create';
 
 import Dashboard from '../pages/Dashboard';
+
 import { ExerciseModalProvider } from '../context/ExerciseModalContext';
+import { ExerciseFormProvider } from '../context/ExerciseFormContext';
 
 function Routes() {
   return (
@@ -18,13 +20,15 @@ function Routes() {
       <BrowserRouter>
         <AuthProvider>
           <ExerciseModalProvider>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/create" component={Create} />
+            <ExerciseFormProvider>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/create" component={Create} />
 
-              <Route path="/dashboard" component={Dashboard} isPrivate />
-            </Switch>
+                <Route path="/dashboard" component={Dashboard} isPrivate />
+              </Switch>
+            </ExerciseFormProvider>
           </ExerciseModalProvider>
         </AuthProvider>
       </BrowserRouter>
