@@ -18,7 +18,7 @@ function Header() {
           <p>
             Bem-vindo,
             {' '}
-            {user.user.name}
+            {user.name}
             .
             {' '}
             <Link to="/" onClick={signOut}>Sair</Link>
