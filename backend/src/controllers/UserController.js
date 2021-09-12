@@ -2,7 +2,6 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const accessTokenSecret = 'ifrs-ppip2';
-const express = require('express');
 
 module.exports = {
   async findAll(req, res) {

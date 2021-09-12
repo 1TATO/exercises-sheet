@@ -15,14 +15,25 @@ function Dashboard() {
     exercises,
     handleEditExercise,
     handleDeleteExercise,
+    setIsEditingExercise,
   } = useExerciseForm();
+
+  function handleCreate() {
+    setIsEditingExercise(false);
+    handleOpenNewExerciseModal();
+  }
+
+  function handleEdit(exercise) {
+    setIsEditingExercise(true);
+    handleEditExercise(exercise);
+  }
 
   return (
     <>
       <Header />
 
       <Container>
-        <Button type="button" onClick={handleOpenNewExerciseModal}>
+        <Button type="button" onClick={handleCreate}>
           Novo exercício
         </Button>
 
@@ -47,12 +58,12 @@ function Dashboard() {
                   <td>{exercise.weight}</td>
                   <td>{exercise.repetitions}</td>
                   <td className="action">
-                    <button type="button" onClick={() => handleEditExercise(exercise)}>
+                    <button type="button" onClick={() => handleEdit(exercise)}>
                       <FiEdit />
                     </button>
                   </td>
                   <td className="action">
-                    <button type="button" onClick={() => handleDeleteExercise(exercise)}>
+                    <button type="button" onClick={() => handleDeleteExercise(exercise.id)}>
                       <FiTrash2 />
                     </button>
                   </td>

@@ -16,19 +16,12 @@ const ExerciseModalProvider = ({ children }) => {
     setIsNewExerciseModalOpen(false);
   }
 
-  function handleSubmit(data) {
-    // e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(data);
-  }
-
   return (
     <ExerciseModalContext.Provider
       value={{
         isNewExerciseModalOpen,
         handleOpenNewExerciseModal,
         handleCloseNewExerciseModal,
-        handleSubmit,
       }}
     >
       {children}
